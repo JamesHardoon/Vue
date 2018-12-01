@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>vue指令: v-show</h3>
+	<div id="app">
+		<!-- 3.创建View -->
+		{{ message }}
+		<!-- 
+			v-show也是条件渲染指令，和v-if指令不同，使用v-show指令元素始终会渲染到html上，
+			它只设置style属性，display:block/none;
+		-->
+		<h3 v-show="yes">yes</h3>
+		<h3 v-show="no">no</h3>
+		<h3 v-show="age > 28">age:{{age}}</h3>
+		<h3 v-show="name.indexOf('o') >= 0">name:{{name}}</h3>
+	</div>
+
+	<script src="js/vue.min.js"></script>
+	<script>
+		//1.创建model
+		var exampleData = {
+			message: "Hello Vue",
+			yes: true,
+			no: false,
+			age: 28,
+			name: "lion"
+		};
+		//2.创建Vue(ViewModel)
+		new Vue({
+			el: "#app",
+			data: exampleData
+		});
+	</script>	
+</body>
+</html>

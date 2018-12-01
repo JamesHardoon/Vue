@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            list-style: none;
+        }
+        li:nth-of-type(2n) {
+            background-color: red;
+        }
+        li:nth-of-type(2n+1) {
+            background-color: green;
+        } -->
+    </style>
+</head>
+<body>
+    <!-- 面试题目要求: 点击哪个li，打印出对应li的索引值 -->
+    <!-- <ul>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+    </ul> -->
+
+    <script>
+        // a = 100;
+        // function demo(e) {
+        //     function e() { }
+        //     arguments[0] = 2;//考察的是arguments控制的参数是不是跟着实参的变化而更改，事实上要改
+        //     document.write(e); // 2
+        //     if (a) { // a 为 undefined 不走 if 判断
+        //         var b = 123;
+        //         function c() {
+        //             // 猪都能做出来
+        //         } 
+        //     }
+        //     var c;
+        //     a = 10;
+        //     var a;
+        //     document.write(b); //undefined
+        //     f = 123;
+        //     document.write(c); // undefined
+        //     document.write(a); // 10
+        // }
+        // var a;
+        // demo(1);
+        // document.write(a); // 10
+        // document.write(f); // 123
+
+        /**
+        AO { // 先找 AO ,即形参，被var定义的变量,然后全部赋值为undefined
+            e:2, // undefined --> 1 --> function e() {} -->2
+            b:undefined, // undefined 
+            c:undefined, // 正常function c() {}也得被提取出来，但现在浏览器语法要求越来越严格，不允许在if里面定义函数，不管if能不能执行
+            a:10  // undefinde --> 10
+        }
+        GO {
+            a: 100,  // 
+            f: 123   // AO 中没有 f ,所以到 GO 中来找f, 也没有，再到全局变量window里面找，为123，此时GO刚好就是window
+        }
+        
+        
+        */
+    </script>
+    <script>
+        // var liCollection = document.getElementsByTagName("li");
+
+        // for (var i = 0; i < liCollection.length; i++) {
+        //     liCollection[i].onclick = function () {
+        //         console.log(i); // 这样写打印的都是4
+        //     }
+        // }
+
+        // 使用闭包的形式来解决此问题
+        // var liCollection = document.getElementsByTagName("li");
+
+        // for (var i = 0; i < liCollection.length; i++) {
+        //     (function (j) { 
+        //         liCollection[j].onclick = function () {
+        //             console.log(j); // 此时点击哪个，哪个打印出哪个的索引
+        //         }
+        //     }(i)); // 这里的形参 i 就是 for 循环中的 i
+        // }
+    </script>
+    <script>
+        // function test() {
+        //     var arr = [];
+        //     for (var i = 0; i < 10; i++){
+        //         arr[i] = function () { // 此处的i会跟着for循环中的i的改变而改变
+        //             document.write( i + " ");// 此处的内容在这里只是定义，并不会执行，要到后面调用myArr[j]()时才会执行
+        //         }
+        //     }
+
+        //     return arr; 
+        // }
+
+        // var myArr = test();
+        // for (var j = 0; j < 10; j++) {
+        //     myArr[j]();  // 10,10,10,10,10,10,10,10,10,10
+        // }
+    
+        // 使用立即执行函数解决上面的问题
+        // function test() {
+        //     var arr = [];
+        //         for (var i = 0; i < 10; i++) { // for 循环里面相当于有10个立即执行函数
+        //             (function (j) { // 形参 
+        //                 arr[j] = function () { // arr[j] 保存的是它外面立即执行函数的结果，即它的AO和GO
+        //                     document.write(j + " ");// 里面的内容还是要等到myArr[j]()调用才会执行，但是会共用立即执行函数的AO和GO
+        //                 }
+        //             }(i));//实参   
+        //         }
+        //     return arr;
+        // }
+
+        // var myArr = test();
+        // for (var j = 0; j < 10; j++) {
+        //     myArr[j]();// 0,1,2,3,4,5,6,7,8,9
+        // }
+    </script>
+    <script>
+        // 2017年微店前端校招题，第四题
+        // var f = (
+        //     function f () {
+        //         return "1";
+        //     },
+        //     function g () {
+        //         return 2;
+        //     }
+        // )();
+
+        // console.log(typeof f);  // number  考察的就是  表达式作为立即执行函数执行的时候，返回 逗号 后面的内容
+
+        // 2017年微店校招题，第五题
+        var x = 1;
+        if (function f () { }) { // 函数f 外面的括号会把里面的东西变成表达式，变成表达式后f就不是函数了，从此之后就消失了
+            x += typeof f; // 所以这里的 f 在前面就是没有声明，而任何一个东西未经声明就使用，那么就会报undefined,所以这里就是1+undefined拼接
+                            // 未经声明的值放在typeof里面不会报错，会返回“undefined”(字符串类型的undefined)
+        }
+        console.log(x);  // 1undefined   
+
+    </script>
+</body>
+</html>

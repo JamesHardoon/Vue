@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 综合数据列表 -->
+    <div id="app">
+        <!-- 通过 v-model 将数据框与 newTodo 绑定起来 -->
+        <!-- @keyup.enter 绑定 addTodo 事件 -->
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo" />
+        <ul>
+            <!-- todos:数组，todo当前数据对象，idx当前数组的下标 -->
+            <li v-for="(todo,idx) in todos">
+                <span>{{todo.text}}</span>
+                <!-- 删除方法，传入数组的下标 -->
+                <button @click="removeTodos(idx)">X</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        // 创建Model
+        var exampleData = {
+            newTodo: " ",  // 保存你输入的内容
+            todos: [{text: "james"}]   // 保存每次输入的内容
+        };
+        // 创建ViewModel
+        new Vue({
+            el: "#app",  // 挂载点
+            data: exampleData,
+            methods: {
+                addTodo: function () {
+                    // 将用户输入的数据保存起来
+                    this.todos.push({text: this.newTodo});
+                    // 清除用户上次输入的内容
+                    this.newTodo = "";
+                },
+                removeTodos: function (idx) {
+                    this.todos.splice(idx , 1);  // 数组的删除，使用splice
+                }
+            }
+        });
+    </script>
+</body>
+</html>

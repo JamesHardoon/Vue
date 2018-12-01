@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .myRed { color: red; }
+        .myYellow { color: yellow; }
+        .mySize { font-size: 39px; }
+        .active { color: red; }
+        .page { list-style: none; }
+        .page > li { 
+            float: left;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- 升级版分页 -->
+    <div id="app">
+        <ul class="page">
+            <li ><a href="#" @click="prev">&lt;</a></li>
+            <li v-for="n in pageCount">
+                <!-- v-bind: 简写成 : -->
+                <a href="#" :class="activeNumber == n ? 'active':''">{{n}}</a>
+            </li>
+            <li ><a href="#" @click="next">&gt;</a></li>
+        </ul>
+    </div>
+
+    <script src="js/vue.min.js"></script>
+    <script>
+        // 创建Model
+        var exampleData = {
+            pageCount: 10,
+            activeNumber: 3
+        };
+        // 创建ViewModel
+        new Vue({
+            el: "#app",
+            data: exampleData,
+            methods: {
+                prev: function () {
+                    var pageNo = this.activeNumber;
+                    pageNo--;
+                    if (pageNo <= 0) {
+                        return;
+                    }
+                    this.activeNumber = pageNo;
+                    // console.log("上一页");
+                },
+                next: function () {
+                    var pageNo = this.activeNumber;
+                    pageNo++;
+                    if (pageNo > this.pageCount) {
+                        return;
+                    }
+                    this.activeNumber = pageNo;
+                    // console.log("下一页");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

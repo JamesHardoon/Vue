@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <ul class="ul" style="list-style: none;">
+
+        </ul>
+    </div>
+
+    <input type="button" value="AJAX提交" onclick="Ajax();" />
+    <div id="resText"></div>
+    
+    <!-- <script type="text/javascript">
+        // jQuery 实现AJAX
+        $(function() {
+            $.ajax({
+                url: 'https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312',
+                type: 'GET',
+                dataType: 'json',
+                success: function(res) {
+                    var result = res.data.replies;
+   
+                    for(var i=0; i<result.length; i++){ // 遍历循环输出获取到的数据
+                        $(".ul").append('<li>' + result[i].content + '</li>'); // 将数据添加到页面上
+                    }
+                }
+            })
+        })
+    </script> -->
+
+    <!-- <script>
+        // 原生JS实现AJAX
+
+        // 1.定义一个函数，通过该函数来异步获取信息
+        function Ajax() {
+            // // 2.声明一个空对象来装入XMLHTTPRequest对象
+            var xhr = null;
+
+            // 3.给 XMLHttpRequest 对象赋值
+            if (window.ActiveXObject) { // IE 5 IE 6 是以ActiveObject的方式，引入XMLHTTPRequest对象的
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            } else { // 除了IE5 IE6 以外的浏览器
+                xhr = new XMLHttpRequest(); // 实例化一个 XMLHttpRequest 对象
+            }
+            // var xhr = new XMLHttpRequest();  // 测试代码
+
+            // 4.实例化成功后，使用open()方法初始化XMLHTTPRequest对象，指定HTTP方法和要使用的服务器URL
+            xhr.open('GET','https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312' , true); // 调用open()方法并采用异步方式
+            
+            // 5. 设置回调函数
+            xhr.onreadystatechange = RequestCallBack;
+
+            // 6. 使用send()方法发送该请求，因为这个请求使用的方式是HTTP的GET方式，所以可以在不指定参数或使用null参数的情况下调用send()方法
+            xhr.send(null); // 因为使用GET方法提交，所以可以使用null作为参数调用
+
+            // 7. 获取服务器响应
+            function RequestCallBack() { // 一旦readyState值改变将会调用该函数
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        // 将xmlHttpReq.responseText的值赋予id为resText的元素
+                        document.getElementById("resText").innerHTML = xhr.responText;
+                    }
+                }
+            }
+        }
+    </script> -->
+
+    <!-- <script>
+        Person.prototype = {
+            name: "love",
+            sayName: function () {
+                console.log(this.name);
+            }
+        }
+        function Person () {
+            this.name = "James";
+        }
+        var person = new Person();
+    </script> -->
+
+    <script>
+        function makeNoSense(x) {
+            this.x = x;
+        }
+        makeNoSense(5);
+        console.log(x); // 5
+        function test() {
+            this.x = 1;
+            console.log(this.x); // 1
+        }   
+        test();
+        
+    </script>
+</body>
+</html>

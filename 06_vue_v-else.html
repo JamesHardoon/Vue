@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>vue指令: v-else</h3>
+	<div id="app">
+		<!-- 3.创建View -->
+		{{ message }}
+		<!-- 
+			v-else 指令必须跟在一个v-if或者v-show元素后，否则不能被识别
+		 -->
+		<h3 v-if="age > 28">age:{{age}}</h3>
+		<h3 v-else>name:{{name}}</h3>
+		<hr>
+		<h3 v-show="name.indexOf('l') > 0">name:{{name}}</h3>
+		<h3 v-else>没查找到此字符</h3>
+
+	</div>
+
+	<script src="js/vue.min.js"></script>
+	<script>
+		//1.创建model
+		var exampleData = {
+			message: "Hello Vue",
+			yes: true,
+			no: false,
+			age: 28,
+			name: "lion"
+		};
+		//2.创建Vue(ViewModel)
+		new Vue({
+			el: "#app",
+			data: exampleData
+		});
+	</script>	
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>vue指令: v-for</h3>
+	<div id="app">
+		<!-- 3.创建View -->
+		<h4>显示数组中的内容</h4>
+		<!-- v-for写法一 -->
+		<!-- 
+			v-for 指令基于一个数组渲染，它的语法与js遍历相似
+		 -->
+		<ul>
+			<li>{{myList[0]}}</li>
+			<li>{{myList[1]}}</li>
+			<li>{{myList[2]}}</li>
+			<li>{{myList[3]}}</li>
+			<li>{{myList[4]}}</li>
+		</ul>
+		<ul>
+			<!-- 循环指令: v-for -->
+			<li v-for="item in myList">
+				{{item}}
+			</li>
+		</ul>		
+		<hr>
+		<!-- v-for写法二 -->
+		<ul>
+			<li v-for="(val,key) in myList">
+				{{"key is " + key + " val is " + val}}
+				<!-- {{key}} : {{val}} -->
+			</li>
+		</ul>
+	</div>
+
+	<script src="js/vue.min.js"></script>
+	<script>
+		//1.创建model
+		var exampleData = {
+			myList: [101,102,103,104,105]
+		};
+		//2.创建Vue(ViewModel)
+		new Vue({
+			el: "#app",
+			data: exampleData
+		});
+	</script>	
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-change="count">自定义指令</h1>
+    </div>
+    <!-- 
+        自定义指令
+        创建 Vue 添加指令
+        new Vue({
+            el: "#app",
+            data: exampleData,
+            directives: {       // 自定义指令
+                change: {       // 自定义指令名称   v-change
+                    bind: function () {},       // bind: 将指令绑定到元素
+                    update: function () {},     // update: 如果在调用指令时，传递了参数，并且参数发生了变化，update 将会执行
+                    unbind: function () {}      // unbind: 解除绑定的操作(比如change指令被删除，则将解除绑定)
+                }
+            }
+        });
+    -->
+    <script src="js/vue.min.js"></script>
+    <script>
+        // 创建Model
+        var exampleData = {
+            msg: "hello",
+            count: 0
+        };
+        // 创建ViewModel
+        new Vue({
+            el: "#app",
+            data: exampleData,
+            methods: {          // 保存自定义方法
+
+            },
+            directives: {       // 保存自定义指令
+                change: {       // 自定义指令   v-change
+                    bind: function (el , bindings) {     // 将指令绑定元素时执行
+                        // el挂载元素     bindings绑定到那个元素上的值
+                        console.log("指令已经绑定到元素了");
+                    },
+                    update: function () {   // 更新数据时执行
+                        console.log("指令中的数据发生了变化");
+                    },
+                    unbind: function () {   //卸载元素时执行
+                        console.log("解除了绑定");
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
