@@ -8,16 +8,13 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
+    <input type="button" value="AJAX提交" onclick="Ajax();" />
     <div>
-        <ul class="ul" style="list-style: none;">
+        <ul id="resText" style="list-style: none;">
 
         </ul>
     </div>
-
-    <input type="button" value="AJAX提交" onclick="Ajax();" />
-    <div id="resText"></div>
-    
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         // jQuery 实现AJAX
         $(function() {
             $.ajax({
@@ -28,19 +25,19 @@
                     var result = res.data.replies;
    
                     for(var i=0; i<result.length; i++){ // 遍历循环输出获取到的数据
-                        $(".ul").append('<li>' + result[i].content + '</li>'); // 将数据添加到页面上
+                        $("#resText").append('<li>' + result[i].content + '</li>'); // 将数据添加到页面上
                     }
                 }
-            })
-        })
-    </script> -->
+            });
+        });
+    </script>
 
     <!-- <script>
         // 原生JS实现AJAX
 
         // 1.定义一个函数，通过该函数来异步获取信息
         function Ajax() {
-            // // 2.声明一个空对象来装入XMLHTTPRequest对象
+            // 2.声明一个空对象来装入XMLHTTPRequest对象
             var xhr = null;
 
             // 3.给 XMLHttpRequest 对象赋值
@@ -64,8 +61,16 @@
             function RequestCallBack() { // 一旦readyState值改变将会调用该函数
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        // 将xmlHttpReq.responseText的值赋予id为resText的元素
-                        document.getElementById("resText").innerHTML = xhr.responText;
+                        // debugger
+                        var responseJson = JSON.parse(xhr.responseText)
+                        var data = responseJson.data.replies;
+                        var arr = [];
+                        for(var i = 0; i < data.length; i++) {
+                            // 将获取到的内容以标签的形式添加到数组中
+                            arr.push("<li>"+data[i].content+"</li>");
+                        }
+                        // 使用数组的jion 方法将数组拆分成字符串
+                        document.getElementById("resText").innerHTML = arr.join();
                     }
                 }
             }
